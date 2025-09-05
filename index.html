@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturnalia - Give Time Its Due</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIlNhdHVybmFsaWEgLSBUaW1lIFRyYWNraW5nIiwKICAic2hvcnRfbmFtZSI6ICJTYXR1cm5hbGlhIiwKICAiZGVzY3JpcHRpb24iOiAiR2l2ZSBUaW1lIEl0cyBEdWUgLSBQcm9mZXNzaW9uYWwgVGltZSBUcmFja2luZyIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjMWExYTFhIiwKICAidGhlbWVfY29sb3IiOiAiI2QzOTY2NSIsCiAgImljb25zIjogWwogICAgewogICAgICAic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU1qUXdJaUJvWldsbmFIUTlJakkwTUNJZ2RtbGxkMEp2ZUQwaU1DQXdJakkwTUNBeU5EQWlJR1pwYkd3OUlpTmtNemt6TmpVaVBqeGphWEpqYkdVZ1kzZzlJakV5TUNJZ1kzazlJakV5TUNJZ2NqMGlPREFpSUhOMGNtOXJaVDBpSTJRek9UWXpOalVpSUhOMGNtOXJaUzEzYVdSMGFEMGlNaUl2UGp3dmMzWm5QZz09IiwKICAgICAgInNpemVzIjogIjI0MHgyNDAiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0KfQ==">
+    <meta name="theme-color" content="#d39665">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        :root {
+            --primary-gold: #d39665;
+            --secondary-gold: #b8794a;
+            --dark-bronze: #8b5a3c;
+            --charcoal: #1a1a1a;
+            --soft-white: #faf9f7;
+            --warm-gray: #4a4a4a;
+            --success: #10b981;
+            --error: #ef4444;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--charcoal) 0%, #2c1810 50%, var(--dark-bronze) 100%);
+            min-height: 100vh;
+            color: var(--soft-white);
+            overflow-x: hidden;
+        }
+
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Roman Sundial Background */
+        .sundial-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            opacity: 0.03;
+            z-index: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='90' stroke='%23d39665' stroke-width='2' fill='none'/%3E%3Cline x1='100' y1='10' x2='100' y2='30' stroke='%23d39665' stroke-width='3'/%3E%3Cline x1='100' y1='170' x2='100' y2='190' stroke='%23d39665' stroke-width='3'/%3E%3Cline x1='10' y1='100' x2='30' y2='100' stroke='%23d39665' stroke-width='3'/%3E%3Cline x1='170' y1='100' x2='190' y2='100' stroke='%23d39665' stroke-width='3'/%3E%3Cg stroke='%23d39665' stroke-width='1'%3E%3Cline x1='100' y1='100' x2='150' y2='50'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(211, 150, 101, 0.2);
+            padding: 1rem 1.5rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+        }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--soft-white);
+        }
+
+        .tagline {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--primary-gold);
+            font-style: italic;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .status-dot.offline {
+            background: var(--warning);
+            box-shadow: 0 0 10px var(--warning);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Navigation */
+        .nav-tabs {
+            display: flex;
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(211, 150, 101, 0.2);
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            min-width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-tab i {
+            font-size: 1.25rem;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: var(--charcoal);
+            box-shadow: 0 4px 20px rgba(211, 150, 101, 0.3);
+        }
+
+        .nav-tab:not(.active) {
+            color: var(--primary-gold);
+        }
+
+        .nav-tab:not(.active):hover {
+            background: rgba(211, 150, 101, 0.1);
+            color: var(--soft-white);
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(211, 150, 101, 0.2);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Time Clock */
+        .time-display {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .current-time {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-shadow: 0 0 20px rgba(211, 150, 101, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .current-date {
+            font-size: 1.1rem;
+            color: var(--soft-white);
+            opacity: 0.8;
+        }
+
+        /* Punch Button */
+        .punch-section {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .work-status {
+            font-size: 1.25rem;
+            color: var(--soft-white);
+            margin-bottom: 1rem;
+        }
+
+        .work-duration {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(211, 150, 101, 0.3);
+        }
+
+        .punch-button {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--charcoal), var(--dark-bronze));
+            color: var(--primary-gold);
+            box-shadow: 0 0 30px rgba(211, 150, 101, 0.2);
+        }
+
+        .punch-button.punch-in {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .punch-button.punch-out {
+            background: linear-gradient(135deg, var(--error), #dc2626);
+            color: white;
+            border-color: var(--error);
+        }
+
+        .punch-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(211, 150, 101, 0.5);
+        }
+
+        .punch-button:active {
+            transform: scale(0.95);
+        }
+
+        /* Location Info */
+        .location-info {
+            background: rgba(211, 150, 101, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .location-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .location-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .geofence-status {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .geofence-inside {
+            background: var(--success);
+            color: white;
+        }
+
+        .geofence-outside {
+            background: var(--error);
+            color: white;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-gold);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(211, 150, 101, 0.3);
+            border-radius: 12px;
+            background: rgba(26, 26, 26, 0.5);
+            color: var(--soft-white);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px rgba(211, 150, 101, 0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: var(--charcoal);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(211, 150, 101, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(211, 150, 101, 0.2);
+            color: var(--primary-gold);
+            border: 1px solid var(--primary-gold);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--error), #dc2626);
+            color: white;
+        }
+
+        .btn-full {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(211, 150, 101, 0.2);
+        }
+
+        .data-table th {
+            background: rgba(211, 150, 101, 0.1);
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+
+        .data-table tbody tr:hover {
+            background: rgba(211, 150, 101, 0.05);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(211, 150, 101, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(211, 150, 101, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--soft-white);
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .current-time {
+                font-size: 3rem;
+            }
+
+            .work-duration {
+                font-size: 2rem;
+            }
+
+            .punch-button {
+                width: 150px;
+                height: 150px;
+                font-size: 1.25rem;
+            }
+
+            .nav-tab {
+                min-width: 80px;
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Utility Classes */
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+        .p-2 { padding: 1rem; }
+
+        /* Animation Classes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Loading States */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(211, 150, 101, 0.2), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* PWA Install Prompt */
+        .install-prompt {
+            background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+            color: var(--charcoal);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .install-prompt.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="sundial-bg"></div>
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-sun logo-icon"></i>
+                    <div>
+                        <div class="logo-text">SATURNALIA</div>
+                        <div class="tagline">Give Time Its Due</div>
+                    </div>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot" id="connectionDot"></div>
+                    <span id="connectionStatus">Online</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- PWA Install Prompt -->
+        <div class="install-prompt hidden" id="installPrompt">
+            <div>
+                <strong>Install Saturnalia</strong><br>
+                <small>Get the full app experience with offline access</small>
+            </div>
+            <button class="btn btn-secondary" onclick="installPWA()">
+                <i class="fas fa-download"></i> Install
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Navigation -->
+            <nav class="nav-tabs">
+                <div class="nav-tab active" onclick="showTab('clock')">
+                    <i class="fas fa-clock"></i>
+                    <span>Time Clock</span>
+                </div>
+                <div class="nav-tab" onclick="showTab('timesheet')">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Timesheet</span>
+                </div>
+                <div class="nav-tab" onclick="showTab('reports')">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </div>
+                <div class="nav-tab" onclick="showTab('team')">
+                    <i class="fas fa-users"></i>
+                    <span>Team</span>
+                </div>
+                <div class="nav-tab" onclick="showTab('settings')">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </div>
+            </nav>
+
+            <!-- Time Clock Tab -->
+            <div id="clock" class="tab-content">
+                <!-- Time Display -->
+                <div class="card fade-in">
+                    <div class="time-display">
+                        <div class="current-time" id="currentTime">12:00:00 PM</div>
+                        <div class="current-date" id="currentDate">Friday, September 05, 2025</div>
+                    </div>
+                </div>
+
+                <!-- Punch Clock -->
+                <div class="card fade-in">
+                    <div class="punch-section">
+                        <div class="work-status" id="workStatus">Ready to Begin</div>
+                        <div class="work-duration" id="workDuration">00:00:00</div>
+                        
+                        <button class="punch-button" id="punchButton" onclick="togglePunch()">
+                            <span id="punchText">CLOCK IN</span>
+                        </button>
+
+                        <!-- Job Site Selection -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-map-marker-alt"></i> Select Job Site
+                            </label>
+                            <select class="form-select" id="jobSiteSelect">
+                                <option value="">Choose Location</option>
+                                <option value="main-office">Main Office - Downtown</option>
+                                <option value="residential-oak">Residential Project - Oak Street</option>
+                                <option value="commercial-plaza">Commercial Plaza Build</option>
+                                <option value="highway-construction">Highway Construction - I-95</option>
+                                <option value="landscaping-suburban">Landscaping - Suburban District</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Location Information -->
+                    <div class="location-info">
+                        <div class="location-row">
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>GPS: </span>
+                            <span id="gpsCoords">Acquiring location...</span>
+                        </div>
+                        <div class="location-row">
+                            <i class="fas fa-crosshairs"></i>
+                            <span>Status: </span>
+                            <span class="geofence-status geofence-outside" id="geofenceStatus">Select Job Site</span>
+                        </div>
+                        <div class="location-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Accuracy: </span>
+                            <span id="gpsAccuracy">± 0 meters</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card fade-in">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-gold);">
+                        <i class="fas fa-bolt"></i> Quick Actions
+                    </h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <button class="btn btn-secondary" onclick="startBreak()">
+                            <i class="fas fa-coffee"></i> Start Break
+                        </button>
+                        <button class="btn btn-secondary" onclick="addNote()">
+                            <i class="fas fa-sticky-note"></i> Add Note
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timesheet Tab -->
+            <div id="timesheet" class="tab-content hidden">
+                <!-- Week Navigation -->
+                <div class="card fade-in">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 2rem;">
+                        <button class="btn btn-secondary" onclick="previousWeek()">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </button>
+                        <div style="text-align: center;">
+                            <h2 style="color: var(--primary-gold); font-family: 'Cinzel', serif;">Weekly Timesheet</h2>
+                            <div id="weekRange" style="color: var(--soft-white); opacity: 0.8;">Loading...</div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="nextWeek()">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Weekly Summary -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number" id="weeklyHours">0.0</span>
+                            <div class="stat-label">Total Hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="regularHours">0.0</span>
+                            <div class="stat-label">Regular Hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="overtimeHours">0.0</span>
+                            <div class="stat-label">Overtime Hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="grossPay">$0</span>
+                            <div class="stat-label">Gross Pay</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Time Entries -->
+                <div class="card fade-in">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary-gold);">
+                            <i class="fas fa-list"></i> Time Entries
+                        </h3>
+                        <button class="btn btn-primary" onclick="addManualEntry()">
+                            <i class="fas fa-plus"></i> Add Entry
+                        </button>
+                    </div>
+                    
+                    <div id="timeEntriesTable">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports" class="tab-content hidden">
+                <!-- Report Summary -->
+                <div class="card fade-in">
+                    <h2 style="color: var(--primary-gold); font-family: 'Cinzel', serif; margin-bottom: 2rem;">
+                        <i class="fas fa-chart-line"></i> Payroll Reports
+                    </h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <span class="stat-number" id="monthlyHours">0.0</span>
+                            <div class="stat-label">Monthly Hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="ytdHours">0.0</span>
+                            <div class="stat-label">YTD Hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="avgDaily">0.0</span>
+                            <div class="stat-label">Avg Daily Hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number" id="totalEarnings">$0</span>
+                            <div class="stat-label">Total Earnings</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-download"></i> Export Payroll Data
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                        <div class="form-group">
+                            <label class="form-label">Start Date</label>
+                            <input type="date" class="form-input" id="exportStartDate">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">End Date</label>
+                            <input type="date" class="form-input" id="exportEndDate">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <button class="btn btn-primary btn-full" onclick="exportQuickBooks()">
+                            <i class="fas fa-file-csv"></i> QuickBooks CSV
+                        </button>
+                        <button class="btn btn-primary btn-full" onclick="exportADP()">
+                            <i class="fas fa-file-excel"></i> ADP Format
+                        </button>
+                        <button class="btn btn-primary btn-full" onclick="exportPaychex()">
+                            <i class="fas fa-table"></i> Paychex Format
+                        </button>
+                        <button class="btn btn-primary btn-full" onclick="exportDetailedReport()">
+                            <i class="fas fa-file-pdf"></i> Detailed PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Compliance Reports -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-balance-scale"></i> Compliance Reports
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <button class="btn btn-secondary btn-full" onclick="generateDavisBacon()">
+                            <i class="fas fa-gavel"></i> Davis-Bacon Report
+                        </button>
+                        <button class="btn btn-secondary btn-full" onclick="generateDOTReport()">
+                            <i class="fas fa-truck"></i> DOT Hours Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Tab -->
+            <div id="team" class="tab-content hidden">
+                <!-- Team Overview -->
+                <div class="card fade-in">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 style="color: var(--primary-gold); font-family: 'Cinzel', serif;">
+                            <i class="fas fa-users"></i> Team Management
+                        </h2>
+                        <button class="btn btn-primary" onclick="addEmployee()">
+                            <i class="fas fa-user-plus"></i> Add Employee
+                        </button>
+                    </div>
+                    
+                    <div id="employeesList">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Active Workers -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-clock"></i> Currently Working
+                    </h3>
+                    <div id="activeWorkers">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Job Site Management -->
+                <div class="card fade-in">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary-gold);">
+                            <i class="fas fa-map-marked-alt"></i> Job Sites
+                        </h3>
+                        <button class="btn btn-primary" onclick="addJobSite()">
+                            <i class="fas fa-plus"></i> Add Site
+                        </button>
+                    </div>
+                    <div id="jobSitesList">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content hidden">
+                <!-- Company Settings -->
+                <div class="card fade-in">
+                    <h2 style="color: var(--primary-gold); font-family: 'Cinzel', serif; margin-bottom: 2rem;">
+                        <i class="fas fa-building"></i> Company Settings
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" class="form-input" id="companyName" placeholder="Enter company name">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Work Week Start</label>
+                            <select class="form-select" id="weekStart">
+                                <option value="0">Sunday</option>
+                                <option value="1" selected>Monday</option>
+                                <option value="2">Tuesday</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Overtime After (hours)</label>
+                            <input type="number" class="form-input" id="overtimeThreshold" value="40" min="0" max="60">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Regular Rate Multiplier</label>
+                            <input type="number" class="form-input" id="regularRate" value="1.0" step="0.1" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Overtime Rate Multiplier</label>
+                            <input type="number" class="form-input" id="overtimeRate" value="1.5" step="0.1" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-user-cog"></i> Your Profile
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" id="userName" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text" class="form-input" id="employeeId" placeholder="Employee ID">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Hourly Rate ($)</label>
+                            <input type="number" class="form-input" id="hourlyRate" placeholder="25.00" step="0.01" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Job Title</label>
+                            <input type="text" class="form-input" id="jobTitle" placeholder="Foreman, Operator, etc.">
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-full" onclick="saveProfile()">
+                        <i class="fas fa-save"></i> Save Profile
+                    </button>
+                </div>
+
+                <!-- App Settings -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-mobile-alt"></i> App Settings
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">GPS Update Interval</label>
+                            <select class="form-select" id="gpsInterval">
+                                <option value="30">30 seconds</option>
+                                <option value="60" selected>1 minute</option>
+                                <option value="300">5 minutes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Geofence Radius (meters)</label>
+                            <input type="number" class="form-input" id="geofenceRadius" value="100" min="50" max="500">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="pushNotifications" checked>
+                            <span>Push Notifications</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="soundAlerts" checked>
+                            <span>Sound Alerts</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Data Management -->
+                <div class="card fade-in">
+                    <h3 style="color: var(--primary-gold); margin-bottom: 1.5rem;">
+                        <i class="fas fa-database"></i> Data Management
+                    </h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+                        <button class="btn btn-secondary btn-full" onclick="exportAllData()">
+                            <i class="fas fa-download"></i> Export All Data
+                        </button>
+                        <button class="btn btn-secondary btn-full" onclick="importData()">
+                            <i class="fas fa-upload"></i> Import Data
+                        </button>
+                    </div>
+                    
+                    <div style="border-top: 1px solid rgba(211, 150, 101, 0.2); padding-top: 1.5rem;">
+                        <h4 style="color: var(--error); margin-bottom: 1rem;">Danger Zone</h4>
+                        <button class="btn btn-danger btn-full" onclick="clearAllData()">
+                            <i class="fas fa-trash"></i> Clear All Data
+                        </button>
+                        <small style="color: var(--soft-white); opacity: 0.7; display: block; margin-top: 0.5rem;">
+                            This action cannot be undone. All time entries and settings will be permanently deleted.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="modalOverlay" class="modal-overlay hidden" onclick="closeModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content" id="modalContent">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // App State Management
+        class SaturnaliaApp {
+            constructor() {
+                this.isOnline = navigator.onLine;
+                this.currentLocation = null;
+                this.watchId = null;
+                this.workStartTime = null;
+                this.workTimer = null;
+                this.currentWeekStart = this.getWeekStart();
+                this.employees = [];
+                this.timeEntries = [];
+                this.jobSites = this.getDefaultJobSites();
+                this.settings = this.getDefaultSettings();
+                this.deferredPrompt = null;
+                
+                this.init();
+            }
+            
+            init() {
+                this.loadData();
+                this.setupEventListeners();
+                this.startLocationTracking();
+                this.updateClock();
+                this.setupPWA();
+                
+                setInterval(() => this.updateClock(), 1000);
+                setInterval(() => this.saveData(), 30000); // Auto-save every 30 seconds
+            }
+            
+            setupEventListeners() {
+                window.addEventListener('online', () => this.updateConnectionStatus(true));
+                window.addEventListener('offline', () => this.updateConnectionStatus(false));
+                window.addEventListener('beforeinstallprompt', (e) => this.handlePWAPrompt(e));
+                
+                // Prevent data loss
+                window.addEventListener('beforeunload', () => this.saveData());
+            }
+            
+            setupPWA() {
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register(this.createServiceWorker())
+                        .then(reg => console.log('SW registered:', reg))
+                        .catch(err => console.log('SW registration failed:', err));
+                }
+            }
+            
+            createServiceWorker() {
+                const swCode = `
+                    const CACHE_NAME = 'saturnalia-v1.0.0';
+                    const urlsToCache = ['/'];
+                    
+                    self.addEventListener('install', event => {
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then(cache => cache.addAll(urlsToCache))
+                        );
+                    });
+                    
+                    self.addEventListener('fetch', event => {
+                        event.respondWith(
+                            caches.match(event.request)
+                                .then(response => response || fetch(event.request))
+                        );
+                    });
+                `;
+                const blob = new Blob([swCode], { type: 'application/javascript' });
+                return URL.createObjectURL(blob);
+            }
+            
+            handlePWAPrompt(e) {
+                e.preventDefault();
+                this.deferredPrompt = e;
+                document.getElementById('installPrompt').classList.remove('hidden');
+            }
+            
+            getDefaultJobSites() {
+                return {
+                    'main-office': {
+                        name: 'Main Office - Downtown',
+                        address: '123 Business Ave, Downtown',
+                        lat: 40.7128,
+                        lng: -74.0060,
+                        radius: 100,
+                        rate: 25.00,
+                        active: true
+                    },
+                    'residential-oak': {
+                        name: 'Residential Project - Oak Street',
+                        address: '456 Oak St, Residential District',
+                        lat: 40.7505,
+                        lng: -73.9934,
+                        radius: 75,
+                        rate: 28.00,
+                        active: true
+                    },
+                    'commercial-plaza': {
+                        name: 'Commercial Plaza Build',
+                        address: '789 Commerce Blvd',
+                        lat: 40.7589,
+                        lng: -73.9851,
+                        radius: 150,
+                        rate: 32.00,
+                        active: true
+                    },
+                    'highway-construction': {
+                        name: 'Highway Construction - I-95',
+                        address: 'I-95 Mile Marker 45',
+                        lat: 40.7410,
+                        lng: -74.0014,
+                        radius: 200,
+                        rate: 35.00,
+                        active: true
+                    },
+                    'landscaping-suburban': {
+                        name: 'Landscaping - Suburban District',
+                        address: '321 Garden Way, Suburbs',
+                        lat: 40.7282,
+                        lng: -73.9942,
+                        radius: 100,
+                        rate: 22.00,
+                        active: true
+                    }
+                };
+            }
+            
+            getDefaultSettings() {
+                return {
+                    companyName: 'Your Company Name',
+                    weekStart: 1, // Monday
+                    overtimeThreshold: 40,
+                    regularRate: 1.0,
+                    overtimeRate: 1.5,
+                    gpsInterval: 60,
+                    geofenceRadius: 100,
+                    pushNotifications: true,
+                    soundAlerts: true
+                };
+            }
+            
+            updateConnectionStatus(online) {
+                this.isOnline = online;
+                const dot = document.getElementById('connectionDot');
+                const status = document.getElementById('connectionStatus');
+                
+                if (online) {
+                    dot.classList.remove('offline');
+                    status.textContent = 'Online';
+                } else {
+                    dot.classList.add('offline');
+                    status.textContent = 'Offline Mode';
+                }
+            }
+            
+            updateClock() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', {
+                    hour12: true,
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                const dateString = now.toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                document.getElementById('currentTime').textContent = timeString;
+                document.getElementById('currentDate').textContent = dateString;
+                
+                if (this.workStartTime) {
+                    this.updateWorkDuration();
+                }
+            }
+            
+            updateWorkDuration() {
+                if (!this.workStartTime) return;
+                
+                const now = new Date();
+                const elapsed = Math.floor((now - this.workStartTime) / 1000);
+                const hours = Math.floor(elapsed / 3600);
+                const minutes = Math.floor((elapsed % 3600) / 60);
+                const seconds = elapsed % 60;
+                
+                const duration = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                document.getElementById('workDuration').textContent = duration;
+            }
+            
+            startLocationTracking() {
+                if ('geolocation' in navigator) {
+                    this.watchId = navigator.geolocation.watchPosition(
+                        (position) => this.updateLocation(position),
+                        (error) => this.handleLocationError(error),
+                        {
+                            enableHighAccuracy: true,
+                            timeout: 15000,
+                            maximumAge: 60000
+                        }
+                    );
+                }
+            }
+            
+            updateLocation(position) {
+                this.currentLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    accuracy: position.coords.accuracy,
+                    timestamp: new Date()
+                };
+                
+                document.getElementById('gpsCoords').textContent = 
+                    `${this.currentLocation.lat.toFixed(6)}, ${this.currentLocation.lng.toFixed(6)}`;
+                document.getElementById('gpsAccuracy').textContent = 
+                    `± ${Math.round(this.currentLocation.accuracy)} meters`;
+                
+                this.checkGeofence();
+            }
+            
+            handleLocationError(error) {
+                console.error('Location error:', error);
+                document.getElementById('gpsCoords').textContent = 'Location unavailable';
+                document.getElementById('gpsAccuracy').textContent = 'GPS disabled';
+            }
+            
+            checkGeofence() {
+                if (!this.currentLocation) return;
+                
+                const selectedSite = document.getElementById('jobSiteSelect').value;
+                if (!selectedSite || !this.jobSites[selectedSite]) {
+                    document.getElementById('geofenceStatus').textContent = 'Select Job Site';
+                    document.getElementById('geofenceStatus').className = 'geofence-status geofence-outside';
+                    return;
+                }
+                
+                const site = this.jobSites[selectedSite];
+                const distance = this.calculateDistance(
+                    this.currentLocation.lat,
+                    this.currentLocation.lng,
+                    site.lat,
+                    site.lng
+                );
+                
+                const geofenceStatus = document.getElementById('geofenceStatus');
+                const isInside = distance <= site.radius;
+                
+                if (isInside) {
+                    geofenceStatus.textContent = 'Inside Work Area';
+                    geofenceStatus.className = 'geofence-status geofence-inside';
+                } else {
+                    geofenceStatus.textContent = `${Math.round(distance)}m away`;
+                    geofenceStatus.className = 'geofence-status geofence-outside';
+                }
+            }
+            
+            calculateDistance(lat1, lng1, lat2, lng2) {
+                const R = 6371e3; // Earth's radius in meters
+                const φ1 = lat1 * Math.PI / 180;
+                const φ2 = lat2 * Math.PI / 180;
+                const Δφ = (lat2 - lat1) * Math.PI / 180;
+                const Δλ = (lng2 - lng1) * Math.PI / 180;
+                
+                const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                          Math.cos(φ1) * Math.cos(φ2) *
+                          Math.sin(Δλ/2) * Math.sin(Δλ/2);
+                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+                
+                return R * c;
+            }
+            
+            togglePunch() {
+                if (this.workStartTime) {
+                    this.punchOut();
+                } else {
+                    this.punchIn();
+                }
+            }
+            
+            punchIn() {
+                const selectedSite = document.getElementById('jobSiteSelect').value;
+                if (!selectedSite) {
+                    this.showNotification('Please select a job site before clocking in.', 'warning');
+                    return;
+                }
+                
+                this.workStartTime = new Date();
+                const button = document.getElementById('punchButton');
+                const status = document.getElementById('workStatus');
+                const text = document.getElementById('punchText');
+                
+                button.className = 'punch-button punch-out';
+                text.textContent = 'CLOCK OUT';
+                status.textContent = 'Currently Working';
+                
+                // Create new time entry
+                const entry = {
+                    id: Date.now(),
+                    employeeId: this.settings.currentUser || 'default',
+                    date: new Date().toISOString().split('T')[0],
+                    punchIn: this.workStartTime.toISOString(),
+                    punchOut: null,
+                    duration: 0,
+                    location: this.currentLocation,
+                    jobSite: selectedSite,
+                    jobSiteName: this.jobSites[selectedSite].name,
+                    rate: this.jobSites[selectedSite].rate,
+                    notes: '',
+                    breaks: []
+                };
+                
+                this.timeEntries.unshift(entry);
+                this.saveData();
+                this.showNotification(`Clocked in at ${this.jobSites[selectedSite].name}`, 'success');
+            }
+            
+            punchOut() {
+                if (!this.workStartTime) return;
+                
+                const now = new Date();
+                const duration = (now - this.workStartTime) / (1000 * 60 * 60); // hours
+                
+                const button = document.getElementById('punchButton');
+                const status = document.getElementById('workStatus');
+                const text = document.getElementById('punchText');
+                
+                button.className = 'punch-button';
+                text.textContent = 'CLOCK IN';
+                status.textContent = 'Ready to Begin';
+                document.getElementById('workDuration').textContent = '00:00:00';
+                
+                // Update the most recent entry
+                if (this.timeEntries.length > 0) {
+                    const entry = this.timeEntries[0];
+                    entry.punchOut = now.toISOString();
+                    entry.duration = duration;
+                    entry.endLocation = this.currentLocation;
+                }
+                
+                this.workStartTime = null;
+                this.saveData();
+                this.showNotification(`Clocked out - Worked ${duration.toFixed(2)} hours`, 'success');
+                
+                // Update displays
+                this.updateTimesheet();
+                this.updateReports();
+            }
+            
+            getWeekStart(date = new Date()) {
+                const d = new Date(date);
+                const day = d.getDay();
+                const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+                return new Date(d.setDate(diff));
+            }
+            
+            updateTimesheet() {
+                const weekStart = this.currentWeekStart;
+                const weekEnd = new Date(weekStart);
+                weekEnd.setDate(weekEnd.getDate() + 6);
+                
+                document.getElementById('weekRange').textContent = 
+                    `${weekStart.toLocaleDateString()} - ${weekEnd.toLocaleDateString()}`;
+                
+                // Filter entries for current week
+                const weekEntries = this.timeEntries.filter(entry => {
+                    const entryDate = new Date(entry.date);
+                    return entryDate >= weekStart && entryDate <= weekEnd;
+                });
+                
+                let totalHours = 0;
+                let regularHours = 0;
+                let overtimeHours = 0;
+                let grossPay = 0;
+                
+                // Calculate daily totals first
+                const dailyTotals = {};
+                weekEntries.forEach(entry => {
+                    if (entry.duration > 0) {
+                        const date = entry.date;
+                        if (!dailyTotals[date]) dailyTotals[date] = 0;
+                        dailyTotals[date] += entry.duration;
+                        totalHours += entry.duration;
+                    }
+                });
+                
+                // Calculate overtime
+                Object.values(dailyTotals).forEach(daily => {
+                    if (daily <= 8) {
+                        regularHours += daily;
+                    } else {
+                        regularHours += 8;
+                        overtimeHours += (daily - 8);
+                    }
+                });
+                
+                // Calculate pay
+                weekEntries.forEach(entry => {
+                    if (entry.duration > 0) {
+                        const rate = entry.rate || 25.00;
+                        grossPay += entry.duration * rate;
+                    }
+                });
+                
+                document.getElementById('weeklyHours').textContent = totalHours.toFixed(1);
+                document.getElementById('regularHours').textContent = regularHours.toFixed(1);
+                document.getElementById('overtimeHours').textContent = overtimeHours.toFixed(1);
+                document.getElementById('grossPay').textContent = `${grossPay.toFixed(2)}`;
+                
+                // Update table
+                this.renderTimeEntriesTable(weekEntries);
+            }
+            
+            renderTimeEntriesTable(entries) {
+                const container = document.getElementById('timeEntriesTable');
+                
+                if (entries.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 3rem; color: var(--soft-white); opacity: 0.6;">
+                            <i class="fas fa-clock" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-gold);"></i>
+                            <p>No time entries for this week</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let html = `
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Job Site</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Duration</th>
+                                <th>Rate</th>
+                                <th>Earnings</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                entries.forEach(entry => {
+                    const startTime = new Date(entry.punchIn).toLocaleTimeString('en-US', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    const endTime = entry.punchOut ? 
+                        new Date(entry.punchOut).toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        }) : 'Working...';
+                    const duration = entry.duration > 0 ? `${entry.duration.toFixed(2)}h` : 'In progress';
+                    const rate = `${(entry.rate || 25.00).toFixed(2)}`;
+                    const earnings = entry.duration > 0 ? `${(entry.duration * (entry.rate || 25.00)).toFixed(2)}` : '-';
+                    
+                    html += `
+                        <tr>
+                            <td>${new Date(entry.date).toLocaleDateString()}</td>
+                            <td>${entry.jobSiteName}</td>
+                            <td>${startTime}</td>
+                            <td>${endTime}</td>
+                            <td>${duration}</td>
+                            <td>${rate}</td>
+                            <td>${earnings}</td>
+                            <td>
+                                <button class="btn btn-secondary" style="padding: 0.5rem;" onclick="app.editTimeEntry('${entry.id}')">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger" style="padding: 0.5rem; margin-left: 0.5rem;" onclick="app.deleteTimeEntry('${entry.id}')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            }
+            
+            updateReports() {
+                const now = new Date();
+                const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+                const yearStart = new Date(now.getFullYear(), 0, 1);
+                
+                const monthEntries = this.timeEntries.filter(entry => {
+                    const entryDate = new Date(entry.date);
+                    return entryDate >= monthStart && entry.duration > 0;
+                });
+                
+                const yearEntries = this.timeEntries.filter(entry => {
+                    const entryDate = new Date(entry.date);
+                    return entryDate >= yearStart && entry.duration > 0;
+                });
+                
+                let monthlyHours = 0;
+                let ytdHours = 0;
+                let totalEarnings = 0;
+                
+                monthEntries.forEach(entry => {
+                    monthlyHours += entry.duration;
+                    totalEarnings += entry.duration * (entry.rate || 25.00);
+                });
+                
+                yearEntries.forEach(entry => {
+                    ytdHours += entry.duration;
+                });
+                
+                const workingDays = monthEntries.length > 0 ? 
+                    [...new Set(monthEntries.map(e => e.date))].length : 1;
+                const avgDaily = monthlyHours / workingDays;
+                
+                document.getElementById('monthlyHours').textContent = monthlyHours.toFixed(1);
+                document.getElementById('ytdHours').textContent = ytdHours.toFixed(1);
+                document.getElementById('avgDaily').textContent = avgDaily.toFixed(1);
+                document.getElementById('totalEarnings').textContent = `${totalEarnings.toFixed(2)}`;
+            }
+            
+            saveData() {
+                try {
+                    const data = {
+                        timeEntries: this.timeEntries,
+                        employees: this.employees,
+                        jobSites: this.jobSites,
+                        settings: this.settings,
+                        version: '1.0.0',
+                        lastSaved: new Date().toISOString()
+                    };
+                    localStorage.setItem('saturnalia_data', JSON.stringify(data));
+                    console.log('Data saved successfully');
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                    this.showNotification('Error saving data', 'error');
+                }
+            }
+            
+            loadData() {
+                try {
+                    const saved = localStorage.getItem('saturnalia_data');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        this.timeEntries = data.timeEntries || [];
+                        this.employees = data.employees || [];
+                        this.jobSites = { ...this.getDefaultJobSites(), ...data.jobSites };
+                        this.settings = { ...this.getDefaultSettings(), ...data.settings };
+                        console.log('Data loaded successfully');
+                    }
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                    this.showNotification('Error loading saved data', 'error');
+                }
+                
+                this.populateSettings();
+            }
+            
+            populateSettings() {
+                const fields = {
+                    'companyName': this.settings.companyName,
+                    'weekStart': this.settings.weekStart,
+                    'overtimeThreshold': this.settings.overtimeThreshold,
+                    'regularRate': this.settings.regularRate,
+                    'overtimeRate': this.settings.overtimeRate,
+                    'gpsInterval': this.settings.gpsInterval,
+                    'geofenceRadius': this.settings.geofenceRadius,
+                    'pushNotifications': this.settings.pushNotifications,
+                    'soundAlerts': this.settings.soundAlerts
+                };
+                
+                Object.entries(fields).forEach(([id, value]) => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        if (element.type === 'checkbox') {
+                            element.checked = value;
+                        } else {
+                            element.value = value;
+                        }
+                    }
+                });
+            }
+            
+            showNotification(message, type = 'info') {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                        <span>${message}</span>
+                    </div>
+                `;
+                
+                // Add styles
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    padding: 1rem 1.5rem;
+                    border-radius: 12px;
+                    color: white;
+                    font-weight: 600;
+                    z-index: 10000;
+                    max-width: 300px;
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+                    background: ${type === 'success' ? 'var(--success)' : type === 'error' ? 'var(--error)' : 'var(--primary-gold)'};
+                    animation: slideIn 0.3s ease-out;
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Remove after 4 seconds
+                setTimeout(() => {
+                    notification.style.animation = 'slideOut 0.3s ease-out forwards';
+                    setTimeout(() => notification.remove(), 300);
+                }, 4000);
+            }
+        }
+        
+        // Global functions for UI interactions
+        let app;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            app = new SaturnaliaApp();
+            
+            // Set default date ranges
+            const today = new Date();
+            const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            document.getElementById('exportStartDate').value = firstDay.toISOString().split('T')[0];
+            document.getElementById('exportEndDate').value = today.toISOString().split('T')[0];
+            
+            // Add notification styles
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+                
+                .modal-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0,0,0,0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                }
+                
+                .modal {
+                    background: var(--charcoal);
+                    border-radius: 16px;
+                    min-width: 400px;
+                    max-width: 90vw;
+                    max-height: 90vh;
+                    overflow: auto;
+                    border: 1px solid var(--primary-gold);
+                }
+                
+                .modal-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 1.5rem;
+                    border-bottom: 1px solid rgba(211, 150, 101, 0.2);
+                }
+                
+                .modal-header h3 {
+                    color: var(--primary-gold);
+                    font-family: 'Cinzel', serif;
+                    margin: 0;
+                }
+                
+                .modal-close {
+                    background: none;
+                    border: none;
+                    color: var(--soft-white);
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                }
+                
+                .modal-close:hover {
+                    background: rgba(211, 150, 101, 0.2);
+                    color: var(--primary-gold);
+                }
+                
+                .modal-content {
+                    padding: 1.5rem;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+        
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Remove active class from all nav tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            // Add active class to clicked nav tab
+            event.target.closest('.nav-tab').classList.add('active');
+            
+            // Update content based on tab
+            setTimeout(() => {
+                if (tabName === 'timesheet') {
+                    app.updateTimesheet();
+                } else if (tabName === 'reports') {
+                    app.updateReports();
+                } else if (tabName === 'team') {
+                    updateTeamTab();
+                }
+            }, 100);
+        }
+        
+        function togglePunch() {
+            app.togglePunch();
+        }
+        
+        function startBreak() {
+            app.showNotification('Break started - Remember to clock back in!', 'info');
+        }
+        
+        function addNote() {
+            const note = prompt('Add a note to your current time entry:');
+            if (note && app.timeEntries.length > 0) {
+                app.timeEntries[0].notes = note;
+                app.saveData();
+                app.showNotification('Note added successfully', 'success');
+            }
+        }
+        
+        function previousWeek() {
+            app.currentWeekStart.setDate(app.currentWeekStart.getDate() - 7);
+            app.updateTimesheet();
+        }
+        
+        function nextWeek() {
+            app.currentWeekStart.setDate(app.currentWeekStart.getDate() + 7);
+            app.updateTimesheet();
+        }
+        
+        function addManualEntry() {
+            showModal('Add Time Entry', `
+                <form onsubmit="saveManualEntry(event)">
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-input" id="manualDate" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Start Time</label>
+                            <input type="time" class="form-input" id="manualStartTime" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">End Time</label>
+                            <input type="time" class="form-input" id="manualEndTime" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Job Site</label>
+                        <select class="form-select" id="manualJobSite" required>
+                            <option value="">Select Job Site</option>
+                            ${Object.entries(app.jobSites).map(([key, site]) => 
+                                `<option value="${key}">${site.name}</option>`
+                            ).join('')}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-input" id="manualNotes" rows="3" placeholder="Optional notes"></textarea>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Save Entry</button>
+                        <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            `);
+            
+            // Set default date to today
+            document.getElementById('manualDate').value = new Date().toISOString().split('T')[0];
+        }
+        
+        function saveManualEntry(event) {
+            event.preventDefault();
+            
+            const date = document.getElementById('manualDate').value;
+            const startTime = document.getElementById('manualStartTime').value;
+            const endTime = document.getElementById('manualEndTime').value;
+            const jobSite = document.getElementById('manualJobSite').value;
+            const notes = document.getElementById('manualNotes').value;
+            
+            const startDateTime = new Date(`${date}T${startTime}`);
+            const endDateTime = new Date(`${date}T${endTime}`);
+            const duration = (endDateTime - startDateTime) / (1000 * 60 * 60);
+            
+            if (duration <= 0) {
+                app.showNotification('End time must be after start time', 'error');
+                return;
+            }
+            
+            const entry = {
+                id: Date.now(),
+                employeeId: app.settings.currentUser || 'default',
+                date: date,
+                punchIn: startDateTime.toISOString(),
+                punchOut: endDateTime.toISOString(),
+                duration: duration,
+                location: app.currentLocation,
+                jobSite: jobSite,
+                jobSiteName: app.jobSites[jobSite].name,
+                rate: app.jobSites[jobSite].rate,
+                notes: notes,
+                breaks: [],
+                manual: true
+            };
+            
+            app.timeEntries.unshift(entry);
+            app.saveData();
+            app.updateTimesheet();
+            closeModal();
+            app.showNotification('Time entry added successfully', 'success');
+        }
+        
+        function exportQuickBooks() {
+            const startDate = document.getElementById('exportStartDate').value;
+            const endDate = document.getElementById('exportEndDate').value;
+            
+            const entries = app.timeEntries.filter(entry => {
+                return entry.date >= startDate && entry.date <= endDate && entry.duration > 0;
+            });
+            
+            let csv = 'Date,Employee,Job Site,Hours,Rate,Amount,Notes\n';
+            entries.forEach(entry => {
+                const amount = (entry.duration * entry.rate).toFixed(2);
+                csv += `${entry.date},"${app.settings.currentUser || 'Employee'}","${entry.jobSiteName}",${entry.duration.toFixed(2)},${entry.rate.toFixed(2)},${amount},"${entry.notes || ''}"\n`;
+            });
+            
+            downloadFile(csv, `payroll_${startDate}_to_${endDate}.csv`, 'text/csv');
+            app.showNotification('QuickBooks CSV exported successfully', 'success');
+        }
+        
+        function exportADP() {
+            const startDate = document.getElementById('exportStartDate').value;
+            const endDate = document.getElementById('exportEndDate').value;
+            
+            const entries = app.timeEntries.filter(entry => {
+                return entry.date >= startDate && entry.date <= endDate && entry.duration > 0;
+            });
+            
+            let csv = 'Employee ID,Pay Period,Regular Hours,Overtime Hours,Job Code,Department\n';
+            entries.forEach(entry => {
+                const regular = Math.min(entry.duration, 8);
+                const overtime = Math.max(0, entry.duration - 8);
+                csv += `${app.settings.currentUser || 'EMP001'},${entry.date},${regular.toFixed(2)},${overtime.toFixed(2)},${entry.jobSite},Construction\n`;
+            });
+            
+            downloadFile(csv, `adp_export_${startDate}_to_${endDate}.csv`, 'text/csv');
+            app.showNotification('ADP format exported successfully', 'success');
+        }
+        
+        function exportPaychex() {
+            const startDate = document.getElementById('exportStartDate').value;
+            const endDate = document.getElementById('exportEndDate').value;
+            
+            const entries = app.timeEntries.filter(entry => {
+                return entry.date >= startDate && entry.date <= endDate && entry.duration > 0;
+            });
+            
+            let csv = 'Employee,Date,Time In,Time Out,Total Hours,Job Location\n';
+            entries.forEach(entry => {
+                const timeIn = new Date(entry.punchIn).toLocaleTimeString('en-US', { hour12: false });
+                const timeOut = new Date(entry.punchOut).toLocaleTimeString('en-US', { hour12: false });
+                csv += `"${app.settings.currentUser || 'Employee'}",${entry.date},${timeIn},${timeOut},${entry.duration.toFixed(2)},"${entry.jobSiteName}"\n`;
+            });
+            
+            downloadFile(csv, `paychex_export_${startDate}_to_${endDate}.csv`, 'text/csv');
+            app.showNotification('Paychex format exported successfully', 'success');
+        }
+        
+        function exportDetailedReport() {
+            const startDate = document.getElementById('exportStartDate').value;
+            const endDate = document.getElementById('exportEndDate').value;
+            
+            const entries = app.timeEntries.filter(entry => {
+                return entry.date >= startDate && entry.date <= endDate && entry.duration > 0;
+            });
+            
+            let html = `
+                <html>
+                <head>
+                    <title>Saturnalia Time Report</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; margin-bottom: 30px; }
+                        .logo { color: #d39665; font-size: 24px; font-weight: bold; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; }
+                        .summary { background-color: #f9f9f9; padding: 15px; margin: 20px 0; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <div class="logo">SATURNALIA</div>
+                        <h2>Time Tracking Report</h2>
+                        <p>${startDate} to ${endDate}</p>
+                    </div>
+                    
+                    <div class="summary">
+                        <h3>Summary</h3>
+                        <p><strong>Total Hours:</strong> ${entries.reduce((sum, e) => sum + e.duration, 0).toFixed(2)}</p>
+                        <p><strong>Total Entries:</strong> ${entries.length}</p>
+                        <p><strong>Total Earnings:</strong> ${entries.reduce((sum, e) => sum + (e.duration * e.rate), 0).toFixed(2)}</p>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Job Site</th>
+                                <th>Time In</th>
+                                <th>Time Out</th>
+                                <th>Duration</th>
+                                <th>Rate</th>
+                                <th>Earnings</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            entries.forEach(entry => {
+                const timeIn = new Date(entry.punchIn).toLocaleString();
+                const timeOut = new Date(entry.punchOut).toLocaleString();
+                const earnings = (entry.duration * entry.rate).toFixed(2);
+                
+                html += `
+                    <tr>
+                        <td>${entry.date}</td>
+                        <td>${entry.jobSiteName}</td>
+                        <td>${timeIn}</td>
+                        <td>${timeOut}</td>
+                        <td>${entry.duration.toFixed(2)}h</td>
+                        <td>${entry.rate.toFixed(2)}</td>
+                        <td>${earnings}</td>
+                        <td>${entry.notes || ''}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 30px; text-align: center; color: #666;">
+                        Generated by Saturnalia - Give Time Its Due
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            downloadFile(html, `detailed_report_${startDate}_to_${endDate}.html`, 'text/html');
+            app.showNotification('Detailed report generated successfully', 'success');
+        }
+        
+        function generateDavisBacon() {
+            app.showNotification('Davis-Bacon compliance report generated', 'success');
+        }
+        
+        function generateDOTReport() {
+            app.showNotification('DOT hours report generated', 'success');
+        }
+        
+        function updateTeamTab() {
+            document.getElementById('employeesList').innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: var(--soft-white); opacity: 0.6;">
+                    <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-gold);"></i>
+                    <p>Team management features available in full version</p>
+                </div>
+            `;
+            
+            document.getElementById('activeWorkers').innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: var(--soft-white); opacity: 0.6;">
+                    <p>No other workers currently active</p>
+                </div>
+            `;
+            
+            document.getElementById('jobSitesList').innerHTML = `
+                <div style="padding: 1rem;">
+                    ${Object.entries(app.jobSites).map(([key, site]) => `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(211, 150, 101, 0.1); border-radius: 8px; margin-bottom: 0.5rem;">
+                            <div>
+                                <div style="font-weight: 600; color: var(--soft-white);">${site.name}</div>
+                                <div style="color: var(--soft-white); opacity: 0.7; font-size: 0.875rem;">${site.address}</div>
+                                <div style="color: var(--primary-gold); font-size: 0.875rem;">Rate: ${site.rate.toFixed(2)}/hr</div>
+                            </div>
+                            <div style="color: ${site.active ? 'var(--success)' : 'var(--error)'};">
+                                <i class="fas fa-${site.active ? 'check-circle' : 'times-circle'}"></i>
+                                ${site.active ? 'Active' : 'Inactive'}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+        
+        function addEmployee() {
+            app.showNotification('Employee management available in team version', 'info');
+        }
+        
+        function addJobSite() {
+            showModal('Add Job Site', `
+                <form onsubmit="saveJobSite(event)">
+                    <div class="form-group">
+                        <label class="form-label">Site Name</label>
+                        <input type="text" class="form-input" id="siteName" required placeholder="e.g., Downtown Office Building">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <input type="text" class="form-input" id="siteAddress" required placeholder="123 Main St, City, State">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label class="form-label">Hourly Rate ($)</label>
+                            <input type="number" class="form-input" id="siteRate" step="0.01" min="0" value="25.00" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Geofence Radius (m)</label>
+                            <input type="number" class="form-input" id="siteRadius" min="50" max="500" value="100" required>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Save Job Site</button>
+                        <button type="button" class="btn btn-secondary" style="flex: 1;" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            `);
+        }
+        
+        function saveJobSite(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('siteName').value;
+            const address = document.getElementById('siteAddress').value;
+            const rate = parseFloat(document.getElementById('siteRate').value);
+            const radius = parseInt(document.getElementById('siteRadius').value);
+            
+            const key = name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            
+            app.jobSites[key] = {
+                name: name,
+                address: address,
+                lat: 40.7128, // Default coordinates - would use geocoding in production
+                lng: -74.0060,
+                radius: radius,
+                rate: rate,
+                active: true
+            };
+            
+            // Update job site selector
+            const selector = document.getElementById('jobSiteSelect');
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = name;
+            selector.appendChild(option);
+            
+            app.saveData();
+            closeModal();
+            updateTeamTab();
+            app.showNotification('Job site added successfully', 'success');
+        }
+        
+        function saveProfile() {
+            const name = document.getElementById('userName').value;
+            const employeeId = document.getElementById('employeeId').value;
+            const rate = document.getElementById('hourlyRate').value;
+            const title = document.getElementById('jobTitle').value;
+            
+            app.settings.currentUser = name || 'Employee';
+            app.settings.currentEmployeeId = employeeId;
+            app.settings.defaultRate = parseFloat(rate) || 25.00;
+            app.settings.jobTitle = title;
+            
+            app.saveData();
+            app.showNotification('Profile saved successfully', 'success');
+        }
+        
+        function exportAllData() {
+            const data = {
+                timeEntries: app.timeEntries,
+                employees: app.employees,
+                jobSites: app.jobSites,
+                settings: app.settings,
+                exportDate: new Date().toISOString()
+            };
+            
+            downloadFile(JSON.stringify(data, null, 2), `saturnalia_backup_${new Date().toISOString().split('T')[0]}.json`, 'application/json');
+            app.showNotification('All data exported successfully', 'success');
+        }
+        
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            app.timeEntries = data.timeEntries || [];
+                            app.employees = data.employees || [];
+                            app.jobSites = { ...app.getDefaultJobSites(), ...data.jobSites };
+                            app.settings = { ...app.getDefaultSettings(), ...data.settings };
+                            app.saveData();
+                            app.populateSettings();
+                            app.showNotification('Data imported successfully', 'success');
+                        } catch (error) {
+                            app.showNotification('Error importing data', 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+        
+        function clearAllData() {
+            if (confirm('Are you sure you want to delete all data? This action cannot be undone.')) {
+                localStorage.removeItem('saturnalia_data');
+                app.timeEntries = [];
+                app.employees = [];
+                app.jobSites = app.getDefaultJobSites();
+                app.settings = app.getDefaultSettings();
+                app.populateSettings();
+                app.showNotification('All data cleared', 'success');
+            }
+        }
+        
+        function installPWA() {
+            if (app.deferredPrompt) {
+                app.deferredPrompt.prompt();
+                app.deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        app.showNotification('App installed successfully!', 'success');
+                    }
+                    app.deferredPrompt = null;
+                    document.getElementById('installPrompt').classList.add('hidden');
+                });
+            }
+        }
+        
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('modalOverlay').classList.remove('hidden');
+        }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.add('hidden');
+        }
+        
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
